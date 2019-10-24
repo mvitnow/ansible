@@ -2,12 +2,6 @@
 - name: Apache server installed
   hosts: all
   tasks:
-  - name: latest Apache version installed
-    yum:
-      name: httpd
-      state: latest
-    tags:
-      - cowsay
   - name: latest firewalld version installed
     yum:
       name: firewalld
@@ -23,12 +17,6 @@
       permanent: true
       state: enabled
       immediate: true
-
-  - name: Apache enabled and running
-    service:
-      name: httpd
-      enabled: true
-      state: started
 
   - name: Check if EPEL repo is already configured.
     stat:
