@@ -11,6 +11,9 @@
     include_role:
       name: security 
 
+  - name: configure security hardening
+    include_role:
+      name: security_hardening
 
   - name: latest firewalld version installed
     yum:
