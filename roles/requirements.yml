@@ -1,0 +1,8 @@
+# cat roles/requirements.yml
+# Import directly from Galaxy
+- src: geerlingguy.nginx
+# Import from a local Git repository
+- src: https://gitlab.com/tower-training/ansible-tower-shared-apache-role.git
+  scm: git
+  version: master
+  name: shared-apache-role
