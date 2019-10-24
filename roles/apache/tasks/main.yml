@@ -2,19 +2,19 @@
 
 - name: latest Apache version installed
   yum:
-    name: {{ packages_to_install }}
+    name: "{{ packages_to_install }}"
     state: latest
 
 - name: firewalld permits http service
   firewalld:
-    service: {{ packages_to_install }}
+    service: "{{ packages_to_install }}"
     permanent: true
     state: enabled
     immediate: true
 
 - name: Apache enabled and running
   service:
-    name: {{ packages_to_install }}
+    name: "{{ packages_to_install }}"
     enabled: true
     state: started
 

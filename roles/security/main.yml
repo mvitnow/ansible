@@ -2,9 +2,8 @@
 
   - name: latest security packages version installed
     yum:
-      name: {{ item }}
+      name: {{ security_packages }}
       state: latest
-    with_items: {{ security_packages }}
 
   - name: firewalld enabled and running
     service:
