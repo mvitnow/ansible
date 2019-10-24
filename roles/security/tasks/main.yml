@@ -1,21 +1,21 @@
 ---
-# tasks file for security
-- name: "HIGH | RHEL-07-010290 | PATCH | The Red Hat Enterprise Linux operating system must not have accounts configured with blank or null passwords."
-  replace:
-    dest: "{{ item }}"
-    follow: true
-    regexp: 'nullok ?'
-  with_items:
-    - /etc/pam.d/system-auth
-    - /etc/pam.d/password-auth
 
-- name: "MEDIUM | RHEL-07-010210 | PATCH | The Red Hat Enterprise Linux operating system must be configured to use the shadow file to store only encrypted representations of passwords."
-  lineinfile:
-    dest: /etc/login.defs
-    regexp: ^#?ENCRYPT_METHOD
-    line: "ENCRYPT_METHOD SHA512"
+  - name: latest security packages version installed
+    yum:
+      name: "{{ security_packages }}"
+      state: latest
 
-- name: "SCORED | 1.1.1.2 | PATCH | Remove freevxfs module"
-  modprobe:
-    name: freevxfs
-    state: absent
+  - name: firewalld enabled and running
+    service:
+      name: "{{ packages_to_install }}"
+      enabled: true
+      state: started
+    with_items: "{{ services_to_enable }}"
+
+  - name: Configure firewalld
+    firewalld:
+      sercice: "{{ item }}"
+      permanent: true
+      state: enabled
+      immediate: true
+    with_items: "{{ firewall_services }}"
